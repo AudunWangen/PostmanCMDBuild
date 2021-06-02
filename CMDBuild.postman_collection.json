@@ -1,0 +1,933 @@
+{
+	"info": {
+		"_postman_id": "2a7c4e01-1135-4b47-8c2a-f22f3c03dda8",
+		"name": "CMDBuild",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate session token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Session ID in response\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.data._id).to.exist;\r",
+							"});\r",
+							"\r",
+							"const responseJson = pm.response.json();\r",
+							"pm.environment.set(\"sessionid\",responseJson.data._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    username:\"{{username}}\",\r\n    password:\"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/sessions?scope=service&returnId=true",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"sessions"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "service"
+						},
+						{
+							"key": "returnId",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List classes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/classes?scope=service",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"classes"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "service"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/classes/IPAddress?scope=service",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"classes",
+						"IPAddress"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "service"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/classes/DHCPRange/cards",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"classes",
+						"DHCPRange",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/classes/DHCPRange/cards/54064",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"classes",
+						"DHCPRange",
+						"cards",
+						"54064"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List class relations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/classes/DHCPRange/relations",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"classes",
+						"DHCPRange",
+						"relations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List domains",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/functions",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"functions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List functions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/domains",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"domains"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List locks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/lookup_types",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"lookup_types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List lookup types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/locks",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"locks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List service status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/system_services",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"system_services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List reports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/system/config",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"system",
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List system configuration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/locks",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"locks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List system status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/system/status",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"system",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/users",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List views",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/views",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"views"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete widget on class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response from CMDBuild\", function () {\r",
+							"   const responseJson = pm.response.json();\r",
+							"   pm.expect(responseJson.success).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cmdbuild-authorization",
+						"value": "{{sessionid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    <Insert content of data of the class here and modify it by emtpying the widgets array>\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cmdbuild_url}}/cards",
+					"host": [
+						"{{cmdbuild_url}}"
+					],
+					"path": [
+						"cards"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
